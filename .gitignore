@@ -5,3 +5,11 @@
 /Iracing Music Player.sln.DotSettings.user
 /IracingSdkWrapper/obj
 /IracingSimulator/obj/
+/IracingSdkWrapper/bin/Debug
+/IracingSdkWrapper/bin/
+/IracingSimulator/bin/Debug
+/MusicPlayer/bin/Debug/
+/MusicPlayer/bin/Release/
+/IracingSimulator/bin/Release/
+/IrsdkSharp/bin/Release/
+/IrsdkSharp/bin/Debug/
