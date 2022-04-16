@@ -88,21 +88,26 @@ public class MainWindowViewModel : INotifyPropertyChanged
                 PlaySound(MusicPlayerConstants.FailSound);
                 break;
             case { } a when a.Contains(SessionFlags.Checkered):
-                PlaySound(MusicPlayerConstants.FinishSound);
+                if (eventArgs.TelemetryInfo.LapDistPct.Value < 0.4 &&
+                    eventArgs.TelemetryInfo.PlayerTrackSurface.Value != TrackSurfaces.InPitStall)
+                    PlaySound(MusicPlayerConstants.FinishSound);
                 break;
         }
     }
 
-    private void PlaySound(string fileName)
+    private void PlaySound(string folderName)
     {
-        if (fileName != this.currentlyPlayingSound)
+        if (folderName != this.currentlyPlayingSound)
         {
-            this.currentlyPlayingSound = fileName;
-            var directoryInfo = new DirectoryInfo("Sounds");
+            this.currentlyPlayingSound = folderName;
+            var directoryInfo = new DirectoryInfo("Sounds\\" + folderName);
+            var files = directoryInfo.GetFiles();
+
+            if (files.Length == 0) return;
+
             this.mediaPlayer.Open(
-                new Uri(directoryInfo
-                    .GetFiles(fileName + "*")
-                    .Single()
+                new Uri(files
+                    .ElementAt(new Random().Next(0, files.Length))
                     .FullName));
             this.mediaPlayer.Play();
         }

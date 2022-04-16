@@ -6,7 +6,8 @@
         mc:Ignorable="d"
         Closed="OnClosed"
         StateChanged="OnStateChanged"
-        Title="MainWindow" Height="450" Width="800">
+        Icon="icon.ico"
+        Title="Iracing Sound Player" Height="300" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -16,15 +17,16 @@
         
         <Label Grid.Row="0" FontSize="20" Content="{Binding ConnectionStatus}"></Label>
         <Label Grid.Row="1" Content="How to use:"></Label>
-        <TextBlock Grid.Row="2" TextWrapping="WrapWithOverflow" Margin="5,0">
-            Replace the files in the sounds folder with your favourite soundclips, these are the names that the program will recognize:&#x0a;
-            -Start&#x0a;
-            -Finish&#x0a;
-            -Menu&#x0a;
-            -Fail&#x0a;
-            It's not needed for all four files to be present, as missing sounds will simply not be played.&#x0a;
-            Supported formats: AAC, MP3, WAV, WMA, probably all the ones that your pc has codecs for, but i can't confirm that.
-            
+        <TextBlock Grid.Row="2" TextWrapping="Wrap" Margin="5,0">
+            The application will do its thing as soon as the sim is running<LineBreak /><LineBreak />
+            To play your own sound files just place them in the appropriate folders inside the "Sounds" folder.<LineBreak />
+            It's not needed to restart the application to load any changes to the sound files, but changes are only reflected when the application needs to load the sound again<LineBreak /><LineBreak />
+            -Start: Is played when first joining the grid on a race start<LineBreak />
+            -Finish: Is played when passing the chequered flag<LineBreak />
+            -Menu: Is played in the in game menu<LineBreak />
+            -Fail: Is played when the player has received a meatball or a disqualification<LineBreak /><LineBreak />
+            It's not needed to have a sound file in all four folders, as missing sounds will simply not be played.<LineBreak />
+            Supported formats: AAC, MP3, WAV, WMA, probably more, you are free to experiment.
         </TextBlock>
     </Grid>
 </Window>
