@@ -3,10 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MusicPlayer"
         mc:Ignorable="d"
+        Closed="OnClosed"
+        StateChanged="OnStateChanged"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" FontSize="20" Content="{Binding ConnectionStatus}"></Label>
+        <Label Grid.Row="1" Content="How to use:"></Label>
+        <TextBlock Grid.Row="2" TextWrapping="WrapWithOverflow" Margin="5,0">
+            Replace the files in the sounds folder with your favourite soundclips, these are the names that the program will recognize:&#x0a;
+            -Start&#x0a;
+            -Finish&#x0a;
+            -Menu&#x0a;
+            -Fail&#x0a;
+            It's not needed for all four files to be present, as missing sounds will simply not be played.&#x0a;
+            Supported formats: AAC, MP3, WAV, WMA, probably all the ones that your pc has codecs for, but i can't confirm that.
+            
+        </TextBlock>
     </Grid>
 </Window>
