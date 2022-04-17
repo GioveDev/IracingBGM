@@ -13,7 +13,7 @@ The application will play audio files of your own choice at various points durin
 .NET 6 Runtime for desktop apps: https://dotnet.microsoft.com/en-us/download/dotnet/6.0/runtime
 
 ## Installation and usage
-Unzip the contents of the archive somewhere, start the application with the IracingSoundPlayer executable, the program will do its thing as soon as the sim is runnning
+Download the latest version from the [releases](https://github.com/NickNicks/IracingSoundPlayer/releases) page and then unzip the contents of the archive somewhere, start the application with the IracingSoundPlayer executable, the program will do its thing as soon as the sim is runnning
 
 ## Using your own audio files
 Inside the "Sounds" folder there will be a further four folders corresponding with the four types of audio events mentioned above,
