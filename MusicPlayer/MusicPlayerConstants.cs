@@ -7,6 +7,6 @@ public static class MusicPlayerConstants
     public const string FailSound = "Fail";
     public const string MenuSound = "Menu";
 
-    public const string Connected = "Status: Connection to sim established";
-    public const string NotConnected = "Status: No connection to sim";
+    public const string Connected = "Status: Connection to the sim established";
+    public const string NotConnected = "Status: No connection to the sim";
 }
