@@ -59,6 +59,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private void OnDisconnected(object? sender, EventArgs e)
     {
+        this.currentlyPlayingSound = string.Empty;
         this.ConnectionStatus = MusicPlayerConstants.NotConnected;
         OnPropertyChanged(nameof(ConnectionStatus));
         this.mediaPlayer.Stop();
