@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <UseWPF>true</UseWPF>
         <DebugSymbols>false</DebugSymbols>
-        <AssemblyName>IracingSoundPlayer</AssemblyName>
+        <AssemblyName>IracingBGM</AssemblyName>
         <ApplicationIcon>icon.ico</ApplicationIcon>
     </PropertyGroup>
 
