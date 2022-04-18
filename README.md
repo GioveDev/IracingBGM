@@ -1,4 +1,4 @@
-# IracinngBGM
+# IracingBGM
 ## What it does
 Video Demonstration: tbd
 
