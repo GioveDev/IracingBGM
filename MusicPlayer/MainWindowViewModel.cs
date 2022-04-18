@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
 using System.Windows.Media;
 using iRacingSdkWrapper;
 using iRacingSdkWrapper.Bitfields;
@@ -31,14 +30,6 @@ public class MainWindowViewModel : INotifyPropertyChanged
         Sim.Instance.Start();
     }
 
-    private void InitializeMediaPlayerVolume()
-    {
-        var content = File.ReadAllText(MusicPlayerConstants.AppSettingsFileName);
-        this.configuration = JsonConvert.DeserializeObject<dynamic>(content);
-
-        this.mediaPlayer.Volume = double.Parse(configuration.Volume.ToString()) / 100;
-    }
-
     public string ConnectionStatus { get; set; } = MusicPlayerConstants.NotConnected;
 
     public double Volume
@@ -56,7 +47,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
     {
         this.configuration.Volume = this.Volume;
         string updatedConfiguration = JsonConvert.SerializeObject(this.configuration);
-        File.WriteAllText(MusicPlayerConstants.AppSettingsFileName, 
+        File.WriteAllText(MusicPlayerConstants.AppSettingsFileName,
             JToken.Parse(updatedConfiguration).ToString(Formatting.Indented));
     }
 
@@ -142,7 +133,23 @@ public class MainWindowViewModel : INotifyPropertyChanged
                     .ElementAt(new Random().Next(0, files.Length))
                     .FullName));
             this.mediaPlayer.Play();
+            this.mediaPlayer.MediaEnded += OnMediaEnded;
         }
+    }
+
+    private void OnMediaEnded(object? sender, EventArgs e)
+    {
+        if (currentlyPlayingSound != MusicPlayerConstants.MenuSound) return;
+        this.currentlyPlayingSound = string.Empty;
+        this.PlaySound(MusicPlayerConstants.MenuSound);
+    }
+
+    private void InitializeMediaPlayerVolume()
+    {
+        var content = File.ReadAllText(MusicPlayerConstants.AppSettingsFileName);
+        this.configuration = JsonConvert.DeserializeObject<dynamic>(content);
+
+        this.mediaPlayer.Volume = double.Parse(configuration.Volume.ToString()) / 100;
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
