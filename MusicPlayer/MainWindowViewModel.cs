@@ -3,11 +3,14 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using System.Windows.Media;
 using iRacingSdkWrapper;
 using iRacingSdkWrapper.Bitfields;
 using iRacingSimulator;
 using MusicPlayer.Annotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MusicPlayer;
 
@@ -16,9 +19,11 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private readonly MediaPlayer mediaPlayer = new();
     private SessionFlag currentFlag;
     private string currentlyPlayingSound;
+    private dynamic configuration;
 
     public MainWindowViewModel()
     {
+        InitializeMediaPlayerVolume();
         Sim.Instance.Connected += OnConnected;
         Sim.Instance.TelemetryUpdated += OnTelemetryUpdated;
         Sim.Instance.Disconnected += OnDisconnected;
@@ -26,19 +31,46 @@ public class MainWindowViewModel : INotifyPropertyChanged
         Sim.Instance.Start();
     }
 
+    private void InitializeMediaPlayerVolume()
+    {
+        var content = File.ReadAllText(MusicPlayerConstants.AppSettingsFileName);
+        this.configuration = JsonConvert.DeserializeObject<dynamic>(content);
+
+        this.mediaPlayer.Volume = double.Parse(configuration.Volume.ToString()) / 100;
+    }
+
     public string ConnectionStatus { get; set; } = MusicPlayerConstants.NotConnected;
+
+    public double Volume
+    {
+        get { return Math.Round(this.mediaPlayer.Volume * 100, 3); }
+        set
+        {
+            var dividedValue = Math.Round(value / 100, 3);
+            this.mediaPlayer.Volume = dividedValue;
+            OnPropertyChanged(nameof(this.Volume));
+        }
+    }
+
+    public void SaveVolume()
+    {
+        this.configuration.Volume = this.Volume;
+        string updatedConfiguration = JsonConvert.SerializeObject(this.configuration);
+        File.WriteAllText(MusicPlayerConstants.AppSettingsFileName, 
+            JToken.Parse(updatedConfiguration).ToString(Formatting.Indented));
+    }
 
     private void OnConnected(object? sender, EventArgs e)
     {
-        ConnectionStatus = MusicPlayerConstants.Connected;
+        this.ConnectionStatus = MusicPlayerConstants.Connected;
         OnPropertyChanged(nameof(ConnectionStatus));
     }
 
     private void OnDisconnected(object? sender, EventArgs e)
     {
-        ConnectionStatus = MusicPlayerConstants.NotConnected;
+        this.ConnectionStatus = MusicPlayerConstants.NotConnected;
         OnPropertyChanged(nameof(ConnectionStatus));
-        mediaPlayer.Stop();
+        this.mediaPlayer.Stop();
     }
 
     private void OnTelemetryUpdated(object? sender, SdkWrapper.TelemetryUpdatedEventArgs e)
