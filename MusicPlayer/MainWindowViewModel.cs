@@ -19,6 +19,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
     private SessionFlag currentFlag;
     private string currentlyPlayingSound;
     private dynamic configuration;
+    private string path;
 
     public MainWindowViewModel()
     {
@@ -47,7 +48,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
     {
         this.configuration.Volume = this.Volume;
         string updatedConfiguration = JsonConvert.SerializeObject(this.configuration);
-        File.WriteAllText(MusicPlayerConstants.AppSettingsFileName,
+        File.WriteAllText(this.path,
             JToken.Parse(updatedConfiguration).ToString(Formatting.Indented));
     }
 
@@ -147,7 +148,11 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private void InitializeMediaPlayerVolume()
     {
-        var content = File.ReadAllText(MusicPlayerConstants.AppSettingsFileName);
+        this.path = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            MusicPlayerConstants.RoamingFolderName,
+            MusicPlayerConstants.AppSettingsFileName);
+        var content = File.ReadAllText(this.path);
         this.configuration = JsonConvert.DeserializeObject<dynamic>(content);
 
         this.mediaPlayer.Volume = double.Parse(configuration.Volume.ToString()) / 100;

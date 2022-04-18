@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IracingBGMInstaller", "IracingBGMInstaller\IracingBGMInstaller.vdproj", "{0BD8C070-B6B6-4928-BB28-C56D28E85EC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Default = Debug|Default
+		Release|Default = Release|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0BD8C070-B6B6-4928-BB28-C56D28E85EC4}.Debug|Default.ActiveCfg = Debug
+		{0BD8C070-B6B6-4928-BB28-C56D28E85EC4}.Debug|Default.Build.0 = Debug
+		{0BD8C070-B6B6-4928-BB28-C56D28E85EC4}.Release|Default.ActiveCfg = Release
+		{0BD8C070-B6B6-4928-BB28-C56D28E85EC4}.Release|Default.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2934897-723A-4B4A-B043-430FAB752562}
+	EndGlobalSection
+EndGlobal

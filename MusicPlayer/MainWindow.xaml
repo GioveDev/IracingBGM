@@ -8,7 +8,7 @@
         Closed="OnClosed"
         StateChanged="OnStateChanged"
         Icon="icon.ico"
-        Title="Iracing Sound Player" Height="150" Width="400">
+        Title="IracingBGM" Height="150" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

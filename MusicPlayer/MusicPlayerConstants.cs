@@ -11,4 +11,5 @@ public static class MusicPlayerConstants
     public const string NotConnected = "Status: No connection to the sim";
 
     public const string AppSettingsFileName = "appsettings.json";
+    public const string RoamingFolderName = "IracingBGM";
 }
